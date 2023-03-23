@@ -137,5 +137,3 @@ class GameBoard private constructor() {
 
 }
 
-data class Position(val x: Int, val y: Int)
-

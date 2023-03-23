@@ -1,4 +1,6 @@
-package fr.npldev.tetris
+package fr.npldev.tetris.Shapes
+
+import fr.npldev.tetris.Tetromino
 
 class ITetromino : Tetromino(
     arrayOf(
