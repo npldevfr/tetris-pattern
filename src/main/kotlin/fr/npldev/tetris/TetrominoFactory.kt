@@ -1,6 +1,6 @@
 package fr.npldev.tetris
 
-import fr.npldev.tetris.Shapes.*
+import fr.npldev.tetris.shapes.*
 import kotlin.random.Random
 
 object TetrominoFactory {

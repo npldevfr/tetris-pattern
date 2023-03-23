@@ -1,4 +1,4 @@
-package fr.npldev.tetris.Shapes
+package fr.npldev.tetris.shapes
 
 import fr.npldev.tetris.Tetromino
 

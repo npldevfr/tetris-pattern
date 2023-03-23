@@ -1,15 +1,15 @@
-package fr.npldev.tetris.Shapes
+package fr.npldev.tetris.shapes
 
 import fr.npldev.tetris.Tetromino
 
-class ZTetromino : Tetromino(
+class STetromino : Tetromino(
     arrayOf(
-        arrayOf(1, 1, 0),
         arrayOf(0, 1, 1),
+        arrayOf(1, 1, 0),
         arrayOf(0, 0, 0)
     )
 ) {
     override fun createTetromino(shape: Array<Array<Int>>): Tetromino {
-        return ZTetromino()
+        return STetromino()
     }
 }
