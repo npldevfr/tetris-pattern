@@ -130,8 +130,8 @@ class GameBoard private constructor() {
 
     fun rotatePiece() {
         val rotatedShape = currentPiece.rotate()
-        if (isValidMove(piecePosition.x, piecePosition.y, rotatedShape.shape)) {
-            currentPiece = rotatedShape
+        if (isValidMove(piecePosition.x, piecePosition.y, rotatedShape)) {
+            currentPiece.shape = rotatedShape
         }
     }
 

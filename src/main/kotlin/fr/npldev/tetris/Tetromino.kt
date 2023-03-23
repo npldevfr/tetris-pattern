@@ -1,17 +1,19 @@
 package fr.npldev.tetris
 
-abstract class Tetromino(open val shape: Array<Array<Int>>) {
+import javafx.scene.paint.Color
 
-    fun rotate(): Tetromino {
-        val rotatedShape = Array(shape.size) { Array(shape.size) { 0 } }
+abstract class Tetromino(open var shape: Array<Array<Int>>, open val color: Color) {
+
+    fun rotate(): Array<Array<Int>> {
+        val rotated = Array(shape.size) { Array(shape.size) { 0 } }
         for (i in shape.indices) {
             for (j in shape.indices) {
-                rotatedShape[i][j] = shape[j][shape.size - 1 - i]
+                rotated[i][j] = shape[shape.size - 1 - j][i]
             }
         }
-        return createTetromino(rotatedShape)
+        return rotated
     }
 
-    abstract fun createTetromino(shape: Array<Array<Int>>): Tetromino
+    abstract fun createTetromino(shape: Array<Array<Int>>, color: Color): Tetromino
 }
 
