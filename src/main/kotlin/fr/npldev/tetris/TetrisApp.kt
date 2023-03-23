@@ -44,27 +44,18 @@ class TetrisApp : Application() {
                     gameBoard.gameSubject.notifyObservers()
                 }
 
-                KeyCode.SPACE -> {
-                    gameBoard.dropPiece()
-                    gameBoard.gameSubject.notifyObservers()
-                }
-
                 else -> {}
             }
         }
 
         primaryStage.show()
 
-        timeline.keyFrames.add(KeyFrame(Duration.millis(calculateInterval()), EventHandler {
+        timeline.keyFrames.add(KeyFrame(Duration.millis(gameBoard.getInterval()), EventHandler {
             gameBoard.movePieceDown()
             gameBoard.gameSubject.notifyObservers()
 
         }))
         timeline.cycleCount = Timeline.INDEFINITE
         timeline.play()
-    }
-
-    private fun calculateInterval(): Double {
-        return 1000.0
     }
 }

@@ -1,5 +1,7 @@
 package fr.npldev.tetris
 
+import kotlin.math.pow
+
 class GameBoard private constructor() {
     public val gameSubject = GameSubject()
 
@@ -24,6 +26,7 @@ class GameBoard private constructor() {
     private var score = 0
     private var level = 1
     private var lines = 0
+    private var interval = 1000.0
 
     fun movePieceLeft() {
         if (isValidMove(piecePosition.x - 1, piecePosition.y)) {
@@ -46,8 +49,11 @@ class GameBoard private constructor() {
             clearFullLines()
             spawnNewPiece()
             !isGameOver()
-
         }
+    }
+
+    fun getInterval(): Double {
+        return interval
     }
 
     private fun isValidMove(x: Int, y: Int, shape: Array<Array<Int>> = currentPiece.shape): Boolean {
@@ -80,10 +86,6 @@ class GameBoard private constructor() {
         return board
     }
 
-    public fun dropPiece() {
-       print("drop")
-    }
-
     private fun clearFullLines() {
         var linesCleared = 0
         for (y in board.indices.reversed()) {
@@ -109,6 +111,8 @@ class GameBoard private constructor() {
         lines += linesCleared
         score += linesCleared * 100 * level
         level = 1 + lines / 10
+
+        interval = 1000.0 * 0.8.pow(lines / 10)
     }
 
     private fun spawnNewPiece() {
@@ -117,7 +121,7 @@ class GameBoard private constructor() {
     }
 
     private fun isGameOver(): Boolean {
-        return false
+        return !isValidMove(piecePosition.x, piecePosition.y)
     }
 
     private fun randomTetromino(): Tetromino {
@@ -126,6 +130,14 @@ class GameBoard private constructor() {
 
     fun getCell(x: Int, y: Int): Int {
         return board[y][x]
+    }
+
+    fun getScore(): Int {
+        return score
+    }
+
+    fun getLevel(): Int {
+        return level
     }
 
     fun rotatePiece() {

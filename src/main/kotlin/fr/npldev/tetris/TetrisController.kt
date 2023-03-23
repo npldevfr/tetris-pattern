@@ -3,9 +3,14 @@ package fr.npldev.tetris
 import javafx.fxml.FXML
 import javafx.scene.canvas.Canvas
 import javafx.scene.canvas.GraphicsContext
+import javafx.scene.control.Label
+import javafx.scene.layout.GridPane
 import javafx.scene.paint.Color
 
 class TetrisController : GameObserver {
+    lateinit var levelLabel: Label
+    lateinit var scoreLabel: Label
+    lateinit var scorePane: GridPane
     private val gameBoard = GameBoard.getInstance()
 
     @FXML
@@ -26,25 +31,33 @@ class TetrisController : GameObserver {
         val gc: GraphicsContext = gameCanvas.graphicsContext2D
         gc.clearRect(0.0, 0.0, gameCanvas.width, gameCanvas.height)
 
-        for (y in 0 until GameBoard.HEIGHT) {
-            for (x in 0 until GameBoard.WIDTH) {
-                val cell = gameBoard.getCell(x, y)
-                gc.fill = if (cell == 0) Color.WHITE else Color.BLACK
-                gc.fillRect(x * cellSize, y * cellSize, cellSize, cellSize)
-            }
-        }
+        scoreLabel.text = gameBoard.getScore().toString()
+        levelLabel.text = gameBoard.getLevel().toString()
 
-        val piece = gameBoard.currentPiece
-        val position = gameBoard.piecePosition
 
-        for (y in 0 until piece.shape.size) {
-            for (x in 0 until piece.shape[y].size) {
-                if (piece.shape[y][x] != 0) {
-                    gc.fill = piece.color;
-                    gc.fillRect((position.x + x) * cellSize, (position.y + y) * cellSize, cellSize, cellSize)
+        // show board
+        for (i in 0 until GameBoard.HEIGHT) {
+            for (j in 0 until GameBoard.WIDTH) {
+                if (gameBoard.getBoard()[i][j] != 0) {
+                    gc.fill = Color.BLACK
+                    gc.fillRect(j * cellSize, i * cellSize, cellSize, cellSize)
                 }
             }
         }
+
+        // show current piece
+        val piece = gameBoard.currentPiece
+        val position = gameBoard.piecePosition
+
+        for (i in piece.shape.indices) {
+            for (j in piece.shape[i].indices) {
+                if (piece.shape[i][j] != 0) {
+                    gc.fill = piece.color
+                    gc.fillRect((j + position.x) * cellSize, (i + position.y) * cellSize, cellSize, cellSize)
+                }
+            }
+        }
+
     }
 }
 
