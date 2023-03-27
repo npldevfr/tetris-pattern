@@ -4,6 +4,8 @@ module fr.npldev.tetris {
     requires kotlin.stdlib;
 
 
-    opens fr.npldev.tetris to javafx.fxml;
     exports fr.npldev.tetris;
+    exports fr.npldev.tetris.controllers;
+    opens fr.npldev.tetris to javafx.fxml;
+    opens fr.npldev.tetris.controllers to javafx.fxml;
 }

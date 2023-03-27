@@ -1,5 +1,7 @@
-package fr.npldev.tetris
+package fr.npldev.tetris.controllers
 
+import fr.npldev.tetris.GameBoard
+import fr.npldev.tetris.GameObserver
 import javafx.fxml.FXML
 import javafx.scene.canvas.Canvas
 import javafx.scene.canvas.GraphicsContext

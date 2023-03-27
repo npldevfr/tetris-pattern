@@ -3,6 +3,8 @@ package fr.npldev.tetris
 import javafx.scene.input.KeyEvent
 
 interface TetrisState {
-    fun handleInput(gameBoard: GameBoard, input: KeyEvent)
-    fun update(gameBoard: GameBoard)
+    fun handleKeyEvent(tetrisApp: TetrisApp, gameBoard: GameBoard, event: KeyEvent)
+    fun update(tetrisApp: TetrisApp, gameBoard: GameBoard)
 }
+
+

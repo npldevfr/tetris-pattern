@@ -52,12 +52,11 @@ class GameBoard private constructor() {
     }
 
     fun tryGoDown(): Boolean {
-        return if (isValidMove(piecePosition.x, piecePosition.y + 1)) {
+        if (isValidMove(piecePosition.x, piecePosition.y + 1)) {
             piecePosition = piecePosition.copy(y = piecePosition.y + 1)
-            true
-        } else {
-            false
+            return true
         }
+        return false
     }
 
     fun getInterval(): Double {

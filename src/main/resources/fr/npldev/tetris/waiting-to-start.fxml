@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           prefWidth="400" prefHeight="600"
+           fx:controller="fr.npldev.tetris.controllers.WaitingToStartController">
+    <VBox alignment="CENTER" spacing="20">
+        <Text text="Tetris Arcade">
+            <font>
+                <Font size="36" />
+            </font>
+        </Text>
+
+        <Button text="Démarrer" onAction="#startGame" maxWidth="200">
+            <VBox.margin>
+                <Insets top="20" />
+            </VBox.margin>
+        </Button>
+
+        <Button text="Quitter" onAction="#quitGame" maxWidth="200" />
+    </VBox>
+</StackPane>
+
+
+
+
+
