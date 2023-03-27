@@ -26,7 +26,7 @@ public class TetrominoFactoryTest {
                 DynamicTest.dynamicTest("Is subClass of Tetronimo ?",
                         () -> Assertions.assertTrue(Tetromino.class.isAssignableFrom(tetromino.getClass()))),
                 DynamicTest.dynamicTest("Has a color ?",
-                        () -> Assertions.assertTrue(Tetromino.class.isAssignableFrom(tetromino.getClass()))),
+                        () -> Assertions.assertTrue(colors.contains(tetromino.getColor()))),
                 DynamicTest.dynamicTest("4 rotates equals initial position",
                         () ->  Assertions.assertArrayEquals(tetromino.getShape(),temp.getShape()))
 
