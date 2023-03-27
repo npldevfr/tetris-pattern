@@ -6,23 +6,25 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.npldev.tetris.controllers.TetrisController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000;" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.npldev.tetris.controllers.TetrisController">
     <children>
         <HBox spacing="10.0">
             <AnchorPane prefHeight="600.0" prefWidth="500.0">
                 <Canvas fx:id="gameCanvas"
-                        height="400.0" width="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0" />
+                        height="400.0" width="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0"
+                        AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0"/>
             </AnchorPane>
-            <VBox spacing="20.0" >
+            <VBox spacing="20.0">
                 <Label text="Score:" style="-fx-text-fill: white"/>
-                <Label fx:id="scoreLabel" style="-fx-font-size: 24; -fx-text-fill: white" text="0" />
+                <Label fx:id="scoreLabel" style="-fx-font-size: 24; -fx-text-fill: white" text="0"/>
                 <Label text="Temps:" style="-fx-text-fill: white"/>
-                <Label fx:id="timeLabel" style="-fx-font-size: 24; -fx-text-fill: white" text="00:00" />
+                <Label fx:id="timeLabel" style="-fx-font-size: 24; -fx-text-fill: white" text="00:00"/>
                 <Label text="Niveau:" style="-fx-text-fill: white"/>
-                <Label fx:id="levelLabel" style="-fx-font-size: 24; -fx-text-fill: white" text="1" />
-                <Label text="Prochain bloc:" style="-fx-text-fill: white" />
+                <Label fx:id="levelLabel" style="-fx-font-size: 24; -fx-text-fill: white" text="1"/>
+                <Label text="Prochain bloc:" style="-fx-text-fill: white"/>
                 <AnchorPane prefHeight="100.0" prefWidth="100.0">
-                    <Canvas fx:id="nextBlockCanvas" height="100.0" width="100.0" />
+                    <Canvas fx:id="nextBlockCanvas" height="100.0" width="100.0"/>
                 </AnchorPane>
             </VBox>
         </HBox>
