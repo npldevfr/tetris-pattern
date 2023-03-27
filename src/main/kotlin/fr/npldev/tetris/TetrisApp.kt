@@ -15,12 +15,15 @@ import javafx.util.Duration
 class TetrisApp : Application() {
     private val gameBoard = GameBoard.getInstance()
     private val timeline = Timeline()
+//    val state: TetrisState = PlayingState()
 
     override fun start(primaryStage: Stage) {
         val root = FXMLLoader.load<Parent>(javaClass.getResource("main.fxml"))
         primaryStage.title = "Tetris"
         primaryStage.scene = Scene(root)
         primaryStage.show()
+
+
 
         primaryStage.scene.onKeyPressed = EventHandler<KeyEvent> { event ->
             when (event.code) {
@@ -44,6 +47,11 @@ class TetrisApp : Application() {
                     gameBoard.gameSubject.notifyObservers()
                 }
 
+                KeyCode.SPACE -> {
+                    gameBoard.dropPiece()
+                    gameBoard.gameSubject.notifyObservers()
+                }
+
                 else -> {}
             }
         }
@@ -51,9 +59,10 @@ class TetrisApp : Application() {
         primaryStage.show()
 
         timeline.keyFrames.add(KeyFrame(Duration.millis(gameBoard.getInterval()), EventHandler {
-            gameBoard.movePieceDown()
+            gameBoard.tryGoDown()
+            println(gameBoard.getInterval())
             gameBoard.gameSubject.notifyObservers()
-
+            gameBoard.timer++
         }))
         timeline.cycleCount = Timeline.INDEFINITE
         timeline.play()

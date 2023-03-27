@@ -20,7 +20,9 @@ class GameBoard private constructor() {
     }
 
     private val board: Array<Array<Int>> = Array(HEIGHT) { Array(WIDTH) { 0 } }
+    var timer: Int = 0;
     var currentPiece: Tetromino = randomTetromino()
+    var nextPiece: Tetromino = randomTetromino()
     var piecePosition: Position = Position(WIDTH / 2 - 2, 0)
 
     private var score = 0
@@ -40,15 +42,21 @@ class GameBoard private constructor() {
         }
     }
 
-    fun movePieceDown(): Boolean {
-        return if (isValidMove(piecePosition.x, piecePosition.y + 1)) {
-            piecePosition = piecePosition.copy(y = piecePosition.y + 1)
-            true
-        } else {
+    fun movePieceDown() {
+        if (!tryGoDown()) {
             placePiece()
             clearFullLines()
             spawnNewPiece()
             !isGameOver()
+        }
+    }
+
+    fun tryGoDown(): Boolean {
+        return if (isValidMove(piecePosition.x, piecePosition.y + 1)) {
+            piecePosition = piecePosition.copy(y = piecePosition.y + 1)
+            true
+        } else {
+            false
         }
     }
 
@@ -72,7 +80,7 @@ class GameBoard private constructor() {
         return true
     }
 
-    fun placePiece() {
+    private fun placePiece() {
         for (i in currentPiece.shape.indices) {
             for (j in currentPiece.shape[i].indices) {
                 if (currentPiece.shape[i][j] != 0) {
@@ -93,7 +101,6 @@ class GameBoard private constructor() {
                 // Remove the full line
                 board[y].fill(0)
 
-                // Shift all lines above the cleared line down
                 for (shiftY in y downTo 1) {
                     board[shiftY].forEachIndexed { index, _ ->
                         board[shiftY][index] = board[shiftY - 1][index]
@@ -102,21 +109,21 @@ class GameBoard private constructor() {
                 // Clear the top line
                 board[0].fill(0)
 
-                // Increment the linesCleared counter
                 linesCleared++
             }
         }
 
-        // Update the lines counter, score, and level
         lines += linesCleared
         score += linesCleared * 100 * level
         level = 1 + lines / 10
 
-        interval = 1000.0 * 0.8.pow(lines / 10)
+        interval = 1000.0 / 2.0.pow(lines / 10)
+
     }
 
     private fun spawnNewPiece() {
-        currentPiece = randomTetromino()
+        currentPiece = nextPiece
+        nextPiece = randomTetromino()
         piecePosition = Position(WIDTH / 2 - 2, 0)
     }
 
@@ -128,9 +135,6 @@ class GameBoard private constructor() {
         return TetrominoFactory.createRandomTetromino()
     }
 
-    fun getCell(x: Int, y: Int): Int {
-        return board[y][x]
-    }
 
     fun getScore(): Int {
         return score
@@ -145,6 +149,17 @@ class GameBoard private constructor() {
         if (isValidMove(piecePosition.x, piecePosition.y, rotatedShape)) {
             currentPiece.shape = rotatedShape
         }
+    }
+
+    fun dropPiece() {
+        while (tryGoDown()) {
+
+        }
+
+        placePiece()
+        clearFullLines()
+        spawnNewPiece()
+        !isGameOver()
     }
 
 }
